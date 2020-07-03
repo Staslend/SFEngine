@@ -1,0 +1,3 @@
+/home/tanaka/Documents/Projects/Game/CMakeFiles/rebuild_cache.dir
+/home/tanaka/Documents/Projects/Game/CMakeFiles/game.dir
+/home/tanaka/Documents/Projects/Game/CMakeFiles/edit_cache.dir
