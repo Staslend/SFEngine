@@ -7,10 +7,6 @@ RenderVector::RenderVector()
 
 RenderVector::~RenderVector()
 {
-	for(int x = 0; x < renderVector.size(); x++)
-	{
-		free(renderVector[x]);
-	}
 }
 
 void RenderVector::AddObject(Object *object)
@@ -18,14 +14,24 @@ void RenderVector::AddObject(Object *object)
 	renderVector.push_back(object);
 }
 
-void RenderVector::Check(int delay)
+int RenderVector::size()
+{
+	return renderVector.size();
+}
+
+bool RenderVector::Render(int delay)
 {
 	for(int i = 0; i < renderVector.size(); i++)
 	{
-		if(renderVector[i]->DecreaseTime(delay))
+		if(renderVector[i]->Render(delay))
 		{
-			renderVector[i]->~Object();
 			renderVector.erase(renderVector.begin() + i);
 		}
 	}
+}
+
+Object* RenderVector::operator[](int i)
+{
+//	if(i > renderVector.size() || i < renderVector.size()) return NULL;
+	return renderVector[i];
 }

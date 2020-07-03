@@ -10,6 +10,11 @@ EventObject::EventObject()
 
 }
 
+EventObject::~EventObject()
+{
+	DebugFunctions::DebugMes("Event object destructor");
+}
+
 void EventObject::MakePressable()
 {
 	pressable = true;

@@ -3,25 +3,6 @@
 Game::Game()
 {
         DebugFunctions::DebugMes("Old game const");
-/*
-        screen.CreateWindow("Window",1280,720);
-
-	background = new Image("/home/tanaka/Documents/Projects/Game/image.bmp",0,0);
-	background->SetSize(1280, 720);
-	background->SetPos(0,0);
-
-	text = new NovelText(1000, 700,
-			     "Cute loli is my pashion but it's imposible to me to speak with them cause I am 3D boy...", "/home/tanaka/Documents/Projects/Game/font.TTF",
-			     {255,255,255}, 50);
-	text->SetSize(1000,700);
-	text->SetPos(140,40);
-*/
-	for(int x = 0; x < parts.size(); x++)
-	{
-		if(parts[x].RVectorUsed()) renderVector.push_back(parts[x].ReturnRVector());
-                if(parts[x].EVectorUsed()) eventVector.push_back(parts[x].ReturnEVector());
-                if(parts[x].SVectorUsed()) screenVector.push_back(parts[x].ReturnSVector());
-	}
 }
 
 Game::~Game()
@@ -32,30 +13,52 @@ Game::~Game()
 void Game::CreateScreen(std::string name, int w, int h)
 {
 	screen.CreateWindow(name.c_str(), w, h);
+
+//	renderVector.AddObject(&screen);
 }
 
 void Game::Start()
 {
         DebugFunctions::DebugMes("Old game start");
 
+        for(int x = 0; x < parts.size(); x++)
+        {
+                if(parts[x]->RVectorUsed()) renderVector.AddObject(parts[x]->ReturnRVector());
+                if(parts[x]->EVectorUsed()) eventVector.AddObject(parts[x]->ReturnEVector());
+                if(parts[x]->SVectorUsed()) screen.AddObject(parts[x]->ReturnSVector());
+        }
+
 	while(!quit)
 	{
+		DebugFunctions::DebugMes("Main loop started");
+
 		time = SDL_GetTicks();
 		while(SDL_PollEvent(&event))
 		{
-			eventVector.Check(&event);
-			if(event.type == SDL_QUIT) return;
-			if(event.key.keysym.sym == SDLK_ESCAPE) return;
+			DebugFunctions::DebugMes("Main event part");
+			if(event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE) return;
+//			else if(event.type == SDL_KEYDOWN)
+//			{
+				DebugFunctions::DebugMes("Main KETDOWN");
+				eventVector.HandleEvent(&event);
+//			}
 		}
 
-		renderVector.Check(delay);
-		screen.Render();
+		renderVector.Render(delay);
+		screen.Render(delay);
+
+		DebugFunctions::DebugMes(std::to_string(SDL_GetTicks()-time));
 
 		SDL_Delay(delay - (SDL_GetTicks() - time));
 
 		timeOfGame += delay;
-		if(timeOfGame >= 50000)
-		{
-		}
+//		if(timeOfGame >= 50000)
+//		{
+//		}
 	}
+}
+
+void Game::AddPart(Part *p)
+{
+	parts.push_back(p);
 }

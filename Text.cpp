@@ -17,7 +17,7 @@ Text::Text(int x, int y, int w, int h, std::string str, std::string path, SDL_Co
 
 	this->color = color;
 
-	font = TTF_OpenFont(path.c_str(), 64);
+	font = TTF_OpenFont(path.c_str(), 80);
 	if(!font) std::cout << TTF_GetError() << std::endl;
 
 	wasChanged = true;
@@ -53,7 +53,7 @@ void Text::LoadString(std::string str)
 	wasChanged = true;
 }
 
-bool Text::DecreaseTime(int delay)
+bool Text::Render(int delay)
 {
 	if(wasChanged)
 	{

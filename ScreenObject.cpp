@@ -10,6 +10,11 @@ ScreenObject::ScreenObject(int x, int y, int w, int h)
 	position = {x,y,w,h};
 }
 
+ScreenObject::~ScreenObject()
+{
+	DebugFunctions::DebugMes("Screen Object destructor");
+}
+
 SDL_Surface* ScreenObject::ReturnSurface()
 {
 }
@@ -23,12 +28,22 @@ SDL_Rect* ScreenObject::ReturnRect()
 	return &position;
 }
 
-
 void ScreenObject::SetPos(int x, int y)
 {
-	position.x = x;
-	position.y = y;
+	this->position.x = x;
+	this->position.y = y;
 }
+
+void ScreenObject::SetX(int x)
+{
+        position.x = x;
+}
+
+void ScreenObject::SetY(int y)
+{
+        position.y = y;
+}
+
 
 void ScreenObject::SetSize(int w, int h)
 {
@@ -54,4 +69,20 @@ int ScreenObject::ReturnW()
 int ScreenObject::ReturnH()
 {
 	return position.h;
+}
+
+bool ScreenObject::IsVector()
+{
+	return isVector;
+}
+
+void ScreenObject::ShakeOff(int delay)
+{
+
+}
+
+bool ScreenObject::ShouldBeDeleted()
+{
+//	DebugFunctions::DebugMes("Screen object should be deleted:" + std::to_string(toDeleteS));
+	return toDeleteS;
 }

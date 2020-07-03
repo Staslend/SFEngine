@@ -1,3 +1,6 @@
+/* How I remember I added this class in this project so I am not shure
+how does it works.
+*/
 #pragma once
 
 #include "Object.h"
@@ -5,10 +8,11 @@
 #include "EventObject.h"
 #include "RenderVector.h"
 #include "ScreenVector.h"
-#include "EventVectro.h"
+#include "EventVector.h"
 
 class Part
 {
+protected:
 	ScreenVector screenVector;
 	RenderVector renderVector;
 	EventVector eventVector;
@@ -28,4 +32,3 @@ public:
 	bool EVectorUsed();
 
 };
-

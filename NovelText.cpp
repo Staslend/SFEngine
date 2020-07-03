@@ -2,6 +2,8 @@
 
 NovelText::NovelText(int w, int h, std::string str, std::string path, SDL_Color color, int delay)
 {
+        DebugFunctions::DebugMes("Novel Text const");
+
 	if(!TTF_WasInit()) std::cout << "Depression" << std::endl;
 
 	position.w = w;
@@ -18,7 +20,7 @@ NovelText::NovelText(int w, int h, std::string str, std::string path, SDL_Color 
 
 	this->color = color;
 
-	font = TTF_OpenFont(path.c_str(), 62);
+	font = TTF_OpenFont(path.c_str(), 50);
 	if(!font) std::cout << TTF_GetError() << std::endl;
 
 	letterToWrite = 0;
@@ -27,17 +29,23 @@ NovelText::NovelText(int w, int h, std::string str, std::string path, SDL_Color 
 
 void NovelText::SetDelay(int delay)
 {
+        DebugFunctions::DebugMes("Novel Text Set delay");
+
 	this->delay = delay;
 }
 
 NovelText::~NovelText()
 {
+        DebugFunctions::DebugMes("Novel text dest");
+
 	SDL_FreeSurface(textSurface);
 	SDL_FreeSurface(letterSurface);
 }
 
-bool NovelText::DecreaseTime(int delay)
+bool NovelText::Render(int delay)
 {
+        DebugFunctions::DebugMes("Novel text render");
+
 	globalDelay += delay;
 
 
@@ -86,11 +94,13 @@ bool NovelText::DecreaseTime(int delay)
 					&letterRect);
 
 			SDL_FreeSurface(letterSurface);
-
+			if(textTexture != NULL) SDL_DestroyTexture(textTexture);
 			textTexture = SDL_CreateTextureFromSurface(Screen::ReturnRenderer(), textSurface);
 
 			letterRect.x += letterRect.w;
 			letterToWrite++;
+
+			int i = 0;
 		}
 	}
 	return false;

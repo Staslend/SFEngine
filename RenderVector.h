@@ -2,6 +2,8 @@
 #include "Object.h"
 #include <vector>
 
+#include "VectorBase.h"
+
 using namespace std;
 
 class RenderVector : public Object
@@ -11,7 +13,10 @@ class RenderVector : public Object
 	RenderVector();
 	~RenderVector();
 	void AddObject(Object*);
-	void Check(int delay);
+	bool Render(int delay) override;
+	int size();
+	Object* operator[](int i);
+
 };
 
 

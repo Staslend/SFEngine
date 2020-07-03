@@ -1,11 +1,12 @@
 #pragma once
 #include "Text.h"
 #include "DebugScreen.h"
+#include "Image.h"
 #include <iostream>
 
 class NovelText : public Text
 {
-	SDL_Surface *letterSurface;
+	SDL_Surface *letterSurface = NULL;
 	SDL_Rect letterRect;
 
 	int letterToWrite = 0;
@@ -17,5 +18,5 @@ public:
 	NovelText();
 	~NovelText();
 	void SetDelay(int delay);
-	bool DecreaseTime(int delay) override;
+	bool Render(int delay) override;
 };

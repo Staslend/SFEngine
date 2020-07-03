@@ -2,27 +2,26 @@
 
 Part::Part()
 {
+	screenVector.SetPos(0,0);
+	screenVector.SetSize(SIZE_W, SIZE_H);
 }
 
 Part::~Part()
 {
 }
 
-std::vector<ScreenObject*>* Part::ReturnSVector()
+ScreenVector* Part::ReturnSVector()
 {
-	sVectorUsed = true;
 	return &screenVector;
 }
 
-std::vector<RenderObject*>* Part::ReturnRVector()
+RenderVector* Part::ReturnRVector()
 {
-	rVectorUsed = true;
 	return &renderVector;
 }
 
-std::vector<EventVector*>* Part::ReturnEVector()
+EventVector* Part::ReturnEVector()
 {
-	eVectorUsed = true;
 	return &eventVector;
 }
 

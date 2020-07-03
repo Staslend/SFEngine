@@ -25,7 +25,9 @@ void Screen::CreateWindow(std::string name, int w, int h)
                                   0,
                                   w,
                                   h,
-                                  SDL_WINDOW_SHOWN);
+                                  SDL_WINDOW_FULLSCREEN);
+
+	DebugFunctions::CheckPointer(window, "Window");
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         SDL_RenderClear(renderer);
@@ -63,9 +65,20 @@ void Screen::Delete(ScreenObject *ob)
 	free(ob);
 }
 
-void Screen::Render()
+void Screen::Render(int delay)
 {
         DebugFunctions::DebugMes("Screen Render");
+
+	timeOfLife += delay;
+	if(timeOfLife > 50)
+	{
+        	for(int x = 0; x < scene.size(); x++)
+       		{
+        	        scene[x]->ShakeOff(delay);
+	        }
+
+		timeOfLife = 0;
+	}
 
 	SDL_RenderClear(renderer);
 	for(int x = 0; x < scene.size(); x++)
@@ -78,4 +91,5 @@ void Screen::Render()
 	}
 	SDL_RenderPresent(renderer);
 }
+
 

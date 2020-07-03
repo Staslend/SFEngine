@@ -2,10 +2,9 @@
 #include "RenderVector.h"
 #include "Screen.h"
 #include "EventVector.h"
-
+#include "Part.h"
 #include "Image.h"
-#include "NovelText.h"
-#include "VNStyle.h"
+
 
 class Game
 {
@@ -16,7 +15,7 @@ class Game
 	//Loop elements
 	Uint16 time;
 	int timeOfGame = 0;
-	int delay = 20;
+	int delay = 43;
 	SDL_Event event;
 	bool quit = false;
 	bool stop = false;

@@ -1,3 +1,7 @@
+/*
+How does the name of class do this class is about work with pixels, I do know
+what can add
+*/
 #include <SDL2/SDL.h>
 
 class SDL_Pixel

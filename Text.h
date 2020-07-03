@@ -10,8 +10,8 @@ class Text : public Object, public ScreenObject
 protected:
 	std::string text;
 	TTF_Font *font;
-	SDL_Surface *textSurface;
-	SDL_Texture *textTexture;
+	SDL_Surface *textSurface = NULL;
+	SDL_Texture *textTexture = NULL;
 	SDL_Color color;
 public:
 	Text();
@@ -22,5 +22,5 @@ public:
 	SDL_Surface *ReturnSurface() override;
 	SDL_Texture *ReturnTexture() override;
 	void LoadString(std::string);
-	bool DecreaseTime(int delay) override;
+	bool Render(int delay) override;
 };
